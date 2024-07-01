@@ -68,7 +68,7 @@ func run(ctx context.Context) error {
 	dst := csv.NewWriter(writer)
 	dst.Write(hdr)
 
-	for ctx.Err() != nil {
+	for ctx.Err() == nil {
 		row, err := src.Read()
 		if row == nil && errors.Is(err, io.EOF) {
 			break

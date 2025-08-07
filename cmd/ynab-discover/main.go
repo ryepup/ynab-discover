@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"log/slog"
 	"os"
 	"os/signal"
 
@@ -26,23 +27,31 @@ func main() {
 func run(ctx context.Context) error {
 	flag.Parse()
 
-	var reader *os.File = os.Stdin
+	reader := os.Stdin
 	if *srcFlag != "-" {
 		f, err := os.Open(*srcFlag)
 		if err != nil {
 			return fmt.Errorf("failed to read source: %w", err)
 		}
-		defer f.Close()
+		defer func() {
+			if err := f.Close(); err != nil {
+				slog.Warn("failed to close source file", "error", err)
+			}
+		}()
 		reader = f
 	}
 
-	var writer *os.File = os.Stdout
+	writer := os.Stdout
 	if *dstFlag != "" {
 		f, err := os.Create(*dstFlag)
 		if err != nil {
 			return fmt.Errorf("failed to open destination: %w", err)
 		}
-		defer f.Close()
+		defer func() {
+			if err := f.Close(); err != nil {
+				slog.Warn("failed to close destination file", "error", err)
+			}
+		}()
 		writer = f
 	}
 

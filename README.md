@@ -24,6 +24,26 @@ import "github.com/ryepup/ynab-discover"
 err := discover.ConvertCSV(ctx, reader, writer)
 ```
 
+## Development
+
+See available development targets:
+
+```bash
+make help
+```
+
+## Releases
+
+To create a new release:
+
+1. Ensure all changes are merged to `main`
+2. Create and push a semver tag:
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+3. GitHub Actions will automatically create a release with changelog
+
 ## See also
 
 - <https://support.ynab.com/en_us/file-based-import-a-guide-Bkj4Sszyo>

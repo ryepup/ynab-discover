@@ -1,0 +1,7 @@
+# Build artifacts
+/bin/
+
+# Test artifacts
+coverage.out
+coverage.html
+test-results.json

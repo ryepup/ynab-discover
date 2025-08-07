@@ -10,7 +10,7 @@ import (
 
 func TestConvertCSV(t *testing.T) {
 	t.Parallel()
-	
+
 	tests := map[string]struct {
 		input    string
 		expected string
@@ -51,7 +51,7 @@ func TestConvertCSV(t *testing.T) {
 	for name, tt := range tests {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
-			
+
 			reader := strings.NewReader(tt.input)
 			var writer bytes.Buffer
 

@@ -1,17 +1,19 @@
 # ynab-discover
 
-Converts CSV exported from Discover.com into a format suitable for importing
-into YNAB. Renames the "Trans. Date" column to "Date" and flips the sign on 
-all amounts (Discover shows expenses as positive, YNAB expects negative). 
-This project is not maintained or endorsed by YNAB.
+Converts CSV exported from Discover.com™ into a format suitable for importing
+into YNAB™. Renames the "Trans. Date" column to "Date" and flips the sign on 
+all amounts (Discover™ shows expenses as positive, YNAB™ expects negative). 
+
+> [!IMPORTANT]
+> This project is **not affiliated with, maintained by, or endorsed by** YNAB™ or Discover Financial Services™.
 
 ## Usage
 
 ### As a CLI tool
 
-1. export transactions from the Discover website as a CSV
+1. export transactions from the Discover™ website as a CSV
 2. run `go run ./cmd/ynab-discover -src from-discover.csv -dst to-ynab.csv`
-3. import the new file to YNAB
+3. import the new file to YNAB™
 
 ### As a library
 

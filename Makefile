@@ -62,6 +62,7 @@ changelog:
 		echo ""; \
 		git log --pretty=format:"- %s"; \
 	fi
+	@echo ""
 
 # Generate test summary with results and coverage
 test-summary: test-results.json coverage.out

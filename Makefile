@@ -1,4 +1,4 @@
-.PHONY: all clean fmt fmt-check lint changelog test-summary help
+.PHONY: all clean fmt fmt-check lint test-summary help
 .DEFAULT_GOAL := all
 
 # Go files for dependency tracking
@@ -50,19 +50,6 @@ fmt-check:
 # Run all checks (what CI runs)
 ci: fmt-check test-results.json lint
 
-# Generate changelog since last tag (or all commits if no previous tag)
-changelog:
-	@PREV_TAG=$$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo ""); \
-	if [ -n "$$PREV_TAG" ]; then \
-		echo "Changes since $$PREV_TAG:"; \
-		echo ""; \
-		git log --pretty=format:"- %s" $$PREV_TAG..HEAD; \
-	else \
-		echo "Changes:"; \
-		echo ""; \
-		git log --pretty=format:"- %s"; \
-	fi
-	@echo ""
 
 # Generate test summary with results and coverage
 test-summary: test-results.json coverage.out
@@ -103,5 +90,4 @@ help:
 	@echo "  fmt-check        - Check if code is formatted"
 	@echo "  ci               - Run all CI checks"
 	@echo "  test-summary     - Show test summary (requires test results)"
-	@echo "  changelog        - Generate changelog since last tag"
 	@echo "  help             - Show this help"

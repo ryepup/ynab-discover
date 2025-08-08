@@ -5,24 +5,15 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+*'  # matches v1.0.0, v1.0.0-beta1, etc.
 
+permissions:
+  contents: write  # needed to create releases
+
 jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Need full history for changelog generation
-    
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version-file: 'go.mod'
-    
-    - name: Run tests
-      run: make test
-    
     - name: Create Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

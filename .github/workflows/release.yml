@@ -23,20 +23,16 @@ jobs:
     - name: Run tests
       run: make test
     
-    - name: Generate changelog
-      id: changelog
-      run: |
-        echo "changelog<<EOF" >> $GITHUB_OUTPUT
-        make changelog >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
-    
     - name: Create Release
-      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.ref_name }}
-        body: ${{ steps.changelog.outputs.changelog }}
-        draft: false
-        prerelease: ${{ contains(github.ref_name, '-') }}
+      run: |
+        PRERELEASE_FLAG=""
+        if [[ "${{ github.ref_name }}" == *"-"* ]]; then
+          PRERELEASE_FLAG="--prerelease"
+        fi
+        
+        gh release create ${{ github.ref_name }} \
+          --title "Release ${{ github.ref_name }}" \
+          --generate-notes \
+          $PRERELEASE_FLAG

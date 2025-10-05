@@ -18,7 +18,7 @@ all amounts (Discover™ shows expenses as positive, YNAB™ expects negative).
 ### As a library
 
 ```go
-import "github.com/ryepup/ynab-discover"
+import discover "github.com/ryepup/ynab-discover"
 
 // Convert a Discover CSV to YNAB format
 err := discover.ConvertCSV(ctx, reader, writer)
